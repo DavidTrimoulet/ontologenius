@@ -39,7 +39,7 @@ run-build:
   stage: build_melodic
   before_script:
   - source /opt/ros/melodic/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev 
+  - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev libtinyxml-dev
   script:
     - mkdir -p ~/ros_ws/src
     - cd ~/ros_ws
