@@ -1,6 +1,6 @@
 before_script:
-  - source /opt/ros/$ROS_DISTRO/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev ros-$ROS_DISTRO-opencv3
+  - source /opt/ros/${ROS_DISTRO}/setup.bash
+  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev ros-${ROS_DISTRO}-opencv3
 
 stages:
   - build_kinetic
