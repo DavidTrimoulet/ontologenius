@@ -11,11 +11,11 @@ stages:
 run-build:
   stage: build
   script:
-    - cd /builds/DavidTrimoulet/gitlab-pipeline-test/welcome
-    - make
+    - cd /builds/DavidTrimoulet/ontologenius
+    - catkin_make
 
 run-test:
   stage: test
   script :
-    - cd /builds/DavidTrimoulet/gitlab-pipeline-test/welcome
+    - cd /builds/DavidTrimoulet/ontologenius
     - make test
