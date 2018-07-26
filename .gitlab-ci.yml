@@ -1,15 +1,40 @@
-image: ros:kinetic-ros-base-xenial
-
 before_script:
   - source /opt/ros/kinetic/setup.bash
   - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev ros-kinetic-opencv3
 
 stages:
-  - build
+  - build_kinetic
+  - build_lunar
+  - build_melodic
   - test
 
 run-build:
-  stage: build
+  image: ros:kinetic-ros-base-xenial
+  stage: build_kinetic
+  script:
+    - mkdir -p ~/ros_ws/src
+    - cd ~/ros_ws
+    - catkin_make
+    - cd src
+    - cp -r /builds/DavidTrimoulet/ontologenius .
+    - cd ..
+    - catkin_make
+
+run-build:
+  image: ros:lunar-ros-base-xenial
+  stage: build_lunar
+  script:
+    - mkdir -p ~/ros_ws/src
+    - cd ~/ros_ws
+    - catkin_make
+    - cd src
+    - cp -r /builds/DavidTrimoulet/ontologenius .
+    - cd ..
+    - catkin_make
+
+run-build:
+  image: ros:melodic-ros-base-bionic
+  stage: build_melodic
   script:
     - mkdir -p ~/ros_ws/src
     - cd ~/ros_ws
@@ -22,5 +47,5 @@ run-build:
 run-test:
   stage: test
   script :
-    - cd /builds/DavidTrimoulet/ontologenius
+    - cd ~/ros_ws
     - make test
