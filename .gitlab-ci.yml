@@ -1,3 +1,23 @@
+.build_script_template : &build_script_definition
+  script:
+    - mkdir -p ~/ros_ws/src
+    - cd ~/ros_ws
+    - catkin_make
+    - cd src
+    - cp -r /builds/DavidTrimoulet/ontologenius .
+    - cd ..
+    - catkin_make
+
+.test_script_template : &test_script_definition
+  script:
+    - mkdir -p ~/ros_ws/src
+    - cd ~/ros_ws
+    - catkin_make
+    - cd src
+    - cp -r /builds/DavidTrimoulet/ontologenius .
+    - cd ..
+    - catkin_make run_tests
+
 stages:
   - build
   - test
@@ -5,17 +25,12 @@ stages:
 run-build-kinetic:
   image: ros:kinetic-perception-xenial
   stage: build
+  variables : 
+    DISTRO : "kinetic"
   before_script:
   - source /opt/ros/kinetic/setup.bash
   - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev
-  script:
-    - mkdir -p ~/ros_ws/src
-    - cd ~/ros_ws
-    - catkin_make
-    - cd src
-    - cp -r /builds/DavidTrimoulet/ontologenius .
-    - cd ..
-    - catkin_make
+  <<: *build_script_definition
     
 run-test-kinetic:
   stage: test
@@ -23,14 +38,7 @@ run-test-kinetic:
   before_script:
   - source /opt/ros/kinetic/setup.bash
   - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev
-  script:
-    - mkdir -p ~/ros_ws/src
-    - cd ~/ros_ws
-    - catkin_make
-    - cd src
-    - cp -r /builds/DavidTrimoulet/ontologenius .
-    - cd ..
-    - catkin_make run_tests
+  <<: *test_script_definition
     
 run-test-melodic:
   stage: test
@@ -38,14 +46,7 @@ run-test-melodic:
   before_script:
   - source /opt/ros/melodic/setup.bash
   - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev libtinyxml-dev
-  script:
-    - mkdir -p ~/ros_ws/src
-    - cd ~/ros_ws
-    - catkin_make
-    - cd src
-    - cp -r /builds/DavidTrimoulet/ontologenius .
-    - cd ..
-    - catkin_make run_tests
+  <<: *test_script_definition
     
 run-build-melodic:
   image: ros:melodic-perception-bionic
@@ -53,14 +54,7 @@ run-build-melodic:
   before_script:
   - source /opt/ros/melodic/setup.bash
   - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev libtinyxml-dev
-  script:
-    - mkdir -p ~/ros_ws/src
-    - cd ~/ros_ws
-    - catkin_make
-    - cd src
-    - cp -r /builds/DavidTrimoulet/ontologenius .
-    - cd ..
-    - catkin_make
+  <<: *build_script_definition
 
 run-build-lunar:
   image: ros:lunar-perception-xenial
@@ -69,11 +63,4 @@ run-build-lunar:
   before_script:
   - source /opt/ros/lunar/setup.bash
   - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev libtinyxml-dev
-  script:
-    - mkdir -p ~/ros_ws/src
-    - cd ~/ros_ws
-    - catkin_make
-    - cd src
-    - cp -r /builds/DavidTrimoulet/ontologenius .
-    - cd ..
-    - catkin_make
+  <<: *build_script_definition
