@@ -1,0 +1,21 @@
+image: ros:kinetic-ros-base-xenial
+
+before_script:
+  - source /opt/ros/kinetic/setup.bash
+  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev
+
+stages:
+  - build
+  - test
+
+run-build:
+  stage: build
+  script:
+    - cd /builds/DavidTrimoulet/gitlab-pipeline-test/welcome
+    - make
+
+run-test:
+  stage: test
+  script :
+    - cd /builds/DavidTrimoulet/gitlab-pipeline-test/welcome
+    - make test
