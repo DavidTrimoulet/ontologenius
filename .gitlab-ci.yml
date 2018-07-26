@@ -47,7 +47,7 @@ run-build-kinetic:
 run-test-kinetic:
   stage: test
   image: ros:kinetic-perception-xenial
-  <<:*kinetic_before_definition
+  <<: *kinetic_before_definition
   <<: *test_script_definition
     
 run-test-melodic:
