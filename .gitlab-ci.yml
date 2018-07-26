@@ -3,6 +3,7 @@ stages:
   - build_lunar
   - build_melodic
   - test_melodic
+  - test_kinetic
 
 run-build-kinetic:
   image: ros:kinetic-perception-xenial
