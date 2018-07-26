@@ -62,5 +62,4 @@ run-test-melodic:
     - cd src
     - cp -r /builds/DavidTrimoulet/ontologenius .
     - cd ..
-    - catkin_make
     - catkin_make run_tests
