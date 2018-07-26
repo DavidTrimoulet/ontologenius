@@ -2,7 +2,7 @@ stages:
   - build_kinetic
   - build_lunar
   - build_melodic
-  - test
+  - test_melodic
 
 run-build:
   image: ros:kinetic-perception-xenial
@@ -50,7 +50,17 @@ run-build:
     - catkin_make
 
 run-test:
-  stage: test
-  script :
+  stage: test_melodic
+  image: ros:melodic-perception-bionic
+  before_script:
+  - source /opt/ros/melodic/setup.bash
+  - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev libtinyxml-dev
+  script:
+    - mkdir -p ~/ros_ws/src
     - cd ~/ros_ws
-    - make test
+    - catkin_make
+    - cd src
+    - cp -r /builds/DavidTrimoulet/ontologenius .
+    - cd ..
+    - catkin_make
+    - catkin_make run_tests
