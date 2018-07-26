@@ -18,6 +18,20 @@
     - cd ..
     - catkin_make run_tests
 
+.kinetic_before_template : &kinetic_before_definition
+  before_script:
+  - source /opt/ros/kinetic/setup.bash
+  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev
+
+.lunar_before_template : &lunar_before_definition
+  before_script:
+  - source /opt/ros/lunar/setup.bash
+  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev
+
+.melodic_before_template : &melodic_before_definition
+  before_script:
+  - source /opt/ros/melodic/setup.bash
+  - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev libtinyxml-dev
 stages:
   - build
   - test
@@ -27,40 +41,30 @@ run-build-kinetic:
   stage: build
   variables : 
     DISTRO : "kinetic"
-  before_script:
-  - source /opt/ros/kinetic/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev
+  <<: *kinetic_before_definition
   <<: *build_script_definition
     
 run-test-kinetic:
   stage: test
   image: ros:kinetic-perception-xenial
-  before_script:
-  - source /opt/ros/kinetic/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev
+  <<:*kinetic_before_definition
   <<: *test_script_definition
     
 run-test-melodic:
   stage: test
   image: ros:melodic-perception-bionic
-  before_script:
-  - source /opt/ros/melodic/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev libtinyxml-dev
+  <<: *melodic_before_definition
   <<: *test_script_definition
     
 run-build-melodic:
   image: ros:melodic-perception-bionic
   stage: build
-  before_script:
-  - source /opt/ros/melodic/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev libtinyxml-dev
+  <<: *melodic_before_definition
   <<: *build_script_definition
 
 run-build-lunar:
   image: ros:lunar-perception-xenial
   stage: build
   allow_failure : true
-  before_script:
-  - source /opt/ros/lunar/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev libtinyxml-dev
+  <<: *lunar_before_definition
   <<: *build_script_definition
