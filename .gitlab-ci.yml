@@ -5,11 +5,11 @@ stages:
   - test
 
 run-build:
-  image: ros:kinetic-ros-base-xenial
+  image: ros:kinetic-perception-xenial
   stage: build_kinetic
   before_script:
   - source /opt/ros/kinetic/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev ros-kinetic-opencv3
+  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev
   script:
     - mkdir -p ~/ros_ws/src
     - cd ~/ros_ws
@@ -20,11 +20,11 @@ run-build:
     - catkin_make
 
 run-build:
-  image: ros:lunar-ros-base-xenial
+  image: ros:lunar-perception-xenial
   stage: build_lunar
   before_script:
   - source /opt/ros/lunar/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev ros-lunar-opencv3
+  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev
   script:
     - mkdir -p ~/ros_ws/src
     - cd ~/ros_ws
@@ -35,11 +35,11 @@ run-build:
     - catkin_make
 
 run-build:
-  image: ros:melodic-ros-base-bionic
+  image: ros:melodic-perception-bionic
   stage: build_melodic
   before_script:
   - source /opt/ros/melodic/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev ros-melodic-opencv3
+  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev 
   script:
     - mkdir -p ~/ros_ws/src
     - cd ~/ros_ws
