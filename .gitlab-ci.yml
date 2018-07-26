@@ -4,7 +4,7 @@
     - cd ~/ros_ws
     - catkin_make
     - cd src
-    - cp -r /builds/DavidTrimoulet/ontologenius .
+    - cp -r /builds/$GITLAB_USER_LOGIN/ontologenius .
     - cd ..
     - catkin_make
 
@@ -14,7 +14,7 @@
     - cd ~/ros_ws
     - catkin_make
     - cd src
-    - cp -r /builds/DavidTrimoulet/ontologenius .
+    - cp -r /builds/$GITLAB_USER_LOGIN/ontologenius .
     - cd ..
     - catkin_make run_tests
 
