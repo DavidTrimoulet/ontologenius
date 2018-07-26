@@ -11,7 +11,12 @@ stages:
 run-build:
   stage: build
   script:
-    - cd /builds/DavidTrimoulet/ontologenius
+    - mkdir -p ros_ws/src
+    - cd ros_ws
+    - catkin_make
+    - cd src
+    - mv /builds/DavidTrimoulet/ontologenius .
+    - cd ..
     - catkin_make
 
 run-test:
