@@ -19,7 +19,7 @@ run-build-kinetic:
     
 run-test-kinetic:
   stage: test
-  image: ros:kinetic-perception-bionic
+  image: ros:kinetic-perception-xenial
   before_script:
   - source /opt/ros/kinetic/setup.bash
   - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev
