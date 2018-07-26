@@ -15,7 +15,7 @@ run-build:
     - cd ~/ros_ws
     - catkin_make
     - cd src
-    - cp /builds/DavidTrimoulet/ontologenius .
+    - cp -r /builds/DavidTrimoulet/ontologenius .
     - cd ..
     - catkin_make
 
