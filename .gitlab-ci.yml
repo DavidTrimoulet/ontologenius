@@ -32,6 +32,8 @@
   before_script:
   - source /opt/ros/melodic/setup.bash
   - apt-get update -qq && apt-get install -y libcppunit-1.14-0 libcppunit-dev libtinyxml-dev
+  
+
 stages:
   - build
   - test
@@ -39,8 +41,6 @@ stages:
 run-build-kinetic:
   image: ros:kinetic-perception-xenial
   stage: build
-  variables : 
-    DISTRO : "kinetic"
   <<: *kinetic_before_definition
   <<: *build_script_definition
     
