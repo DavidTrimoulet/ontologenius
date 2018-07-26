@@ -4,7 +4,7 @@ stages:
   - build_melodic
   - test_melodic
 
-run-build:
+run-build-kinetic:
   image: ros:kinetic-perception-xenial
   stage: build_kinetic
   before_script:
@@ -19,7 +19,7 @@ run-build:
     - cd ..
     - catkin_make
 
-run-build:
+run-build-lunar:
   image: ros:lunar-perception-xenial
   stage: build_lunar
   before_script:
@@ -34,7 +34,7 @@ run-build:
     - cd ..
     - catkin_make
 
-run-build:
+run-build-melodic:
   image: ros:melodic-perception-bionic
   stage: build_melodic
   before_script:
@@ -49,7 +49,7 @@ run-build:
     - cd ..
     - catkin_make
 
-run-test:
+run-test-melodic:
   stage: test_melodic
   image: ros:melodic-perception-bionic
   before_script:
