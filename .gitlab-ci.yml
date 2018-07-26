@@ -2,7 +2,7 @@ image: ros:kinetic-ros-base-xenial
 
 before_script:
   - source /opt/ros/kinetic/setup.bash
-  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev
+  - apt-get update -qq && apt-get install -y libcppunit-1.13-0v5 libcppunit-dev ros-kinetic-opencv3
 
 stages:
   - build
